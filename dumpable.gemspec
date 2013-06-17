@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andrew Hunter"]
   s.date = "2013-06-17"
-  s.description = "TODO: longer description of your gem"
+  s.description = "Generate the SQL to insert a single record and all of its dependencies"
   s.email = "andrew.hunter@livingsocial.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.25"
-  s.summary = "TODO: one-line summary of your gem"
+  s.summary = "Have MySQL take a dump on a single record"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
