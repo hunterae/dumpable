@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "dumpable"
   gem.homepage = "http://github.com/hunterae/dumpable"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Have MySQL take a dump on a single record}
+  gem.description = %Q{Generate the SQL to insert a single record and all of its dependencies}
   gem.email = "andrew.hunter@livingsocial.com"
   gem.authors = ["Andrew Hunter"]
   # dependencies defined in Gemfile
