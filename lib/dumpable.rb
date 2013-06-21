@@ -37,15 +37,15 @@ module Dumpable
     elsif dumps.is_a?(Hash)
       dumps.each do |key, value|
         recursive_dump(object, id_padding, key)
-        object.send(key).to_a.each { |child| recursive_dump(child, id_padding, value) }
+        Array(object.send(key)).each { |child| recursive_dump(child, id_padding, value) }
       end
     elsif dumps.is_a?(Symbol) || dumps.is_a?(String)
-      object.send(dumps).to_a.each do |child_object|
+      Array(object.send(dumps)).each do |child_object|
         reflection = object.class.reflections[dumps]
         if reflection.macro == :belongs_to
-          object.send("#{reflection.primary_key_name}=", object.id + id_padding)
+          object.send("#{reflection.association_foreign_key}=", object.id + id_padding)
         elsif [:has_many, :has_one].include? reflection.macro
-          child_object.send("#{reflection.primary_key_name}=", object.id + id_padding)
+          child_object.send("#{reflection.association_primary_key}=", object.id + id_padding)
         end
         puts child_object.send(:generate_insert_query, id_padding)
       end
@@ -55,13 +55,20 @@ module Dumpable
   # http://invisipunk.blogspot.com/2008/04/activerecord-raw-insertupdate.html
   def dump_value_string(value)
     case value.class.to_s
-      when "Time": "'#{value.strftime("%Y-%m-%d %H:%M:%S")}'"
-      when "NilClass": "NULL"
-      when "Fixnum": value
-      when "String": "'#{value.gsub(/'/, "\\\\'")}'"
-      when "FalseClass": '0'
-      when "TrueClass": '1'
-      else "'#{value}'"
+      when "Time"
+        "'#{value.strftime("%Y-%m-%d %H:%M:%S")}'"
+      when "NilClass"
+        "NULL"
+      when "Fixnum"
+        value
+      when "String"
+        "'#{value.gsub(/'/, "\\\\'")}'"
+      when "FalseClass"
+        '0'
+      when "TrueClass"
+        '1'
+      else
+        "'#{value}'"
     end
   end
 
