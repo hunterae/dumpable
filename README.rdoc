@@ -1,16 +1,33 @@
 = dumpable
 
-Description goes here.
+Output all the sql commands necessary to generate a database row and its associations.
 
-== Contributing to dumpable
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+For example:
+  class User < ActiveRecord::Base
+    has_many :posts
+    has_many :roles
+
+    dumpable [:roles, {:posts => :comments}]
+  end
+
+  class Role < ActiveRecord::Base
+    belongs_to :user
+  end
+
+  class Post < ActiveRecord::Base
+    has_many :comments
+  end
+
+  class Comments < ActiveRecord::Base
+    belongs_to :post
+  end
+
+Then, from the console, you can do something like:
+  User.first.dump
+This will spit out all the MySQL insertion code for the user, it's roles, it's posts, and each post's comments
+
+If you want all to pad the ids generated in the insertion code, this can be done as follows:
+  User.first.dump(:id_padding => 1000)
 
 == Copyright
 
