@@ -46,7 +46,6 @@ At the moment, Dumpable will not work on any complex relationships. This include
 It also will not work on models that have a different primary key than id or on models with complex keys.
 
 It is also only setup to work with MySQL databases and is untested with any other databases.
->>>>>>> Regenerate gemspec for version 0.2.0
 
 == Copyright
 
