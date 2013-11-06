@@ -14,6 +14,11 @@ module Dumpable
   def self.dump(*records_and_collections)
     Dumpable::Dumper.dump(*records_and_collections)
   end
+
+  # Default way to setup Dumpable
+  def self.setup
+    yield config
+  end
 end
 
 ActiveRecord::Base.send :include, Dumpable::ActiveRecordExtensions
