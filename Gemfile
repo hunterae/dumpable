@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails"
+gem "hashie"
 
 group :development do
   gem "shoulda", ">= 0"
