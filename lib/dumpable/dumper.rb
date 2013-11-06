@@ -2,9 +2,9 @@ module Dumpable
   class Dumper
     attr_accessor :dumpee, :options, :id_padding, :dumps
 
-    def initialize(dumpee, options)
+    def initialize(dumpee, options={})
       @dumpee = dumpee
-      @options = Dumpable.config.merge(options)
+      @options = Dumpable.config.merge(options || {})
       @id_padding = @options[:id_padding] || (@dumpee.class.respond_to?(:dumpable_options) && @dumpee.class.dumpable_options[:id_padding]) || Dumpable.config.id_padding
       @dumps = @options[:dumps] || (@dumpee.class.respond_to?(:dumpable_options) && @dumpee.class.dumpable_options[:dumps])
       @lines = []
