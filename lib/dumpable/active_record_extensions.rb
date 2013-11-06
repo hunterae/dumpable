@@ -11,7 +11,7 @@ module Dumpable
         class_eval do
           cattr_accessor :dumpable_options
         end
-        self.dumpable_options = Dumpable.config.merge(options)
+        self.dumpable_options = options
       end
 
       def dump(options={})
