@@ -67,7 +67,7 @@ module Dumpable
       return nil unless cloned_attributes["id"].present?
       cloned_attributes["id"] += @id_padding
       key_values = cloned_attributes.collect{ |key,value| [key, dump_value_string(value)] }
-      keys = key_values.collect{ |item| item[0].to_s }.join(", ")
+      keys = key_values.collect{ |item| "`#{item[0]}`" }.join(", ")
       values = key_values.collect{ |item| item[1].to_s }.join(", ")
 
       "INSERT INTO #{object.class.table_name} (#{ keys }) VALUES (#{ values });"
