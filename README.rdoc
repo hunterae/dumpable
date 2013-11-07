@@ -30,8 +30,7 @@ If you want all to pad the ids generated in the insertion code, this can be done
   User.first.dump(:id_padding => 1000)
 This will ensure that the id of the above user is padded by 1000, so a user id of 1 will generate an insert statement with an id of 1001.
 
-You may wonder why the id is included as part of the insert statement. This is to ensure that all associations maintain their relations to one another.
-For example, if TODO
+You may wonder why the id is included as part of the insert statement. This is to ensure that all associations maintain their relationship to one another.
 
 All ActiveRecord models are dumpable automatically, so you could also call:
   Post.dump
@@ -40,6 +39,13 @@ You can also dump all the entries in the table by calling:
   Post.dump
   # or
   Post.where(:published => true).dump
+
+== Dumping to a sql file
+  Post.dump(:file => PATH_TO_FILE)
+
+== Dumping multiple different record types
+  Dumpable.dump(Post, Comment.limit(10), Role.where(:active => true)) # will output to console
+  Dumpable.dump(Post, Comment.limit(10), Role.where(:active => true), :file => "dump.sql") # will output to file
 
 == Gotchas
 At the moment, Dumpable will not work on any complex relationships. This includes has_many :through, and has_and_belongs_to_many.
