@@ -41,7 +41,7 @@ You can also dump all the entries in the table by calling:
   Post.where(:published => true).dump
 
 == Dumping to a sql file
-  Post.dump(:file => PATH_TO_FILE)
+  User.dump(:file => PATH_TO_FILE)
 
 == Dumping multiple different record types
   Dumpable.dump(Post, Comment.limit(10), Role.where(:active => true)) # will output to console
