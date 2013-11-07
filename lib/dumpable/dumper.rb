@@ -88,6 +88,8 @@ module Dumpable
           '0'
         when "TrueClass"
           '1'
+        when "ActiveSupport::HashWithIndifferentAccess"
+          "'#{value.to_yaml.gsub(/'/, "\\\\'")}'"
         else
           "'#{value}'"
       end
