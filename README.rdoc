@@ -1,8 +1,31 @@
 = dumpable
 
-Output all the sql commands necessary to generate a database row and its relationships.
+The situation is all too common. There is an error in production that you want to reproduce in your local
+development environment. Only problem is that the production environment has database data that you don't have locally. 
+
+So then you generally only have one option: dump your entire production database, or a subset of your production
+database to a sql file and import the dump into your local database.
+
+What if time is of the essense, and the production database is huge? What if you could dump only the
+specific records and their associations that you need to reproduce the record causing problems in your local database. 
+
+Dumpable allows you to do just that. You can dump single rows (or a collection of rows), 
+and choose which associations to dump with those rows.
+
+== Installation
+Add the following to your Gemfile:
+  gem 'dumpable'
 
 == Usage
+The dumpable gem will automatically add the class method #dumpable and the instance method #dump into all your 
+ActiveRecord models.
+
+By default, calling dump on any record will output the sql insert statement necessary to create that record.
+It will not generate the insert statements for any of the record's associations. These can either be specified
+class level by calling #dumpable with the set of assocations to dump or a run-time in your call to #dump.
+
+Both cases will be demonstrated below.
+
   class User < ActiveRecord::Base
     has_many :posts
     has_many :roles
@@ -26,7 +49,7 @@ Then, from the console, you can do something like:
   User.first.dump
 This will spit out all the MySQL insertion code for the user, it's roles, it's posts, and each post's comments
 
-If you want all to pad the ids generated in the insertion code, this can be done as follows:
+If you want each record to pad the ids generated in the insertion code, this can be done as follows:
   User.first.dump(:id_padding => 1000)
 This will ensure that the id of the above user is padded by 1000, so a user id of 1 will generate an insert statement with an id of 1001.
 
@@ -34,10 +57,12 @@ You may wonder why the id is included as part of the insert statement. This is t
 
 All ActiveRecord models are dumpable automatically, so you could also call:
   Post.dump
+  # or
+  Post.dump(:dumps => :comments)
 
 You can also dump all the entries in the table by calling:
   Post.dump
-  # or
+  # or with conditions
   Post.where(:published => true).dump
 
 == Dumping to a sql file
