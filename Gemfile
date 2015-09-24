@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails"
+gem "activerecord"
 gem "hashie"
 
 group :development do
