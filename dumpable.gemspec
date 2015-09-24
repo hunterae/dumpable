@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "dumpable-0.3.0.gem",
     "dumpable.gemspec",
     "lib/dumpable.rb",
     "lib/dumpable/active_record_extensions.rb",
