@@ -30,7 +30,7 @@ Both cases will be demonstrated below.
     has_many :posts
     has_many :roles
 
-    dumpable [:roles, {:posts => :comments}]
+    dumpable dumps: [:roles, {:posts => :comments}]
   end
 
   class Role < ActiveRecord::Base
