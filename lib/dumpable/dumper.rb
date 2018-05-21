@@ -79,7 +79,7 @@ module Dumpable
     # http://invisipunk.blogspot.com/2008/04/activerecord-raw-insertupdate.html
     def dump_value_string(value)
       case value.class.to_s
-        when "Time"
+        when "Time", "ActiveSupport::TimeWithZone"
           "'#{value.strftime("%Y-%m-%d %H:%M:%S")}'"
         when "NilClass"
           "NULL"
