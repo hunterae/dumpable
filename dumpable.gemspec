@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Andrew Hunter"]
-  s.date = "2015-09-24"
+  s.date = "2018-05-21"
   s.description = "Generate the SQL to insert a single record and all of its dependencies"
   s.email = "andrew.hunter@livingsocial.com"
   s.extra_rdoc_files = [
@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/hunterae/dumpable"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.4"
+  s.rubygems_version = "2.4.8"
   s.summary = "Have MySQL take a dump on a single record"
 
   if s.respond_to? :specification_version then
