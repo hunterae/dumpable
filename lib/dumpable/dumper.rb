@@ -46,7 +46,7 @@ module Dumpable
         end
       elsif dumps.is_a?(Symbol) || dumps.is_a?(String)
         Array(object.send(dumps)).each do |child_object|
-          reflection = object.class.reflections[dumps.to_sym]
+          reflection = object.class.reflect_on_association(dumps.to_sym)
           if reflection.macro == :belongs_to
             object.send("#{reflection.association_foreign_key}=", object.id + @id_padding)
           elsif [:has_many, :has_one].include? reflection.macro
