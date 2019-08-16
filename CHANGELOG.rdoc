@@ -1,0 +1,2 @@
+0.3.2
+* Switched reflection to use reflect_on_association for more recent versions of Rails (thanks @radomirz)
